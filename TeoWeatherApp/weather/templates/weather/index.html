@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather app</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body> 
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">  
+          <span class="fs-4">TeoWeb</span>
+        </a>
+  
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+          <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="https://teo-weather.netlify.app/">PC version</a>
+          <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="https://teoweb11.wordpress.com/">About US</a>
+        </nav>
+      </div>
+      <div class="container mt-5">   
+        <div class="row">
+            <div class="col-5 offset-1">
+                 <h1>weather in your city</h1>
+                 <form method="post" >
+                  {% csrf_token %}
+                    <label for="city">City</label>
+                    <input type="text" id="city" class="form-control" name="city" placeholder="enter city" >
+                    <button type="submit" name="send" value="take weather" class="mt-2 btn btn-danger">Get Weather</button>
+                 </form>
+
+            </div>
+          {% if info %}
+            <div class="col-4 offset-1"> 
+                <h1>City info</h1> 
+             
+              {% if info.city != 'city not found' %}
+                <div class="alert alert-success">
+                  <div class="row">
+                    <div class="col-9">
+                      <b>City:</b> {{info.city}}<br>
+                      <b>MAX Temp:</b> {{info.temp_max}}<sup>o</sup><br>
+                      <b>MIN Temp:</b> {{info.temp_min}}<sup>o</sup><br>
+                      <b>Wind Speed:</b> {{info.wind}}<br>
+                      <b>Description:</b> {{info.description}}<br>
+                       <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="photo" class="img-thumbnail"><br>
+                       <b>Country:</b> {{info.country_info}}<br>
+                    </div>
+              {% else %}
+                    <h2>{{ info.city }}</h2>
+                    <p>Please try again with a valid city name.</p>
+              {% endif %}
+          {% endif %}
+                  </div>                
+                </div>
+                  
+          </div>
+        </div>
+      </div>
+   
+
+</body>
+</html>
