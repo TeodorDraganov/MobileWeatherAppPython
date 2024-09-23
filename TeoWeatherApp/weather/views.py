@@ -4,7 +4,7 @@ from django.shortcuts import render
 # Create your views here.
 
 def index(request):
-    appid = '0f7368fb6d8073123a090f9b507b6767'
+    appid = 'enter your api key from open weather'
     url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid
 
 
